@@ -1,5 +1,6 @@
 """Import the Account class from the Account.py file."""
 # ADD YOUR CODE HERE
+from Account import Account
 
 def create_cd_account(balance, interest_rate, months):
     """Creates a CD account, calculates interest earned, and updates the account balance.
@@ -16,18 +17,33 @@ def create_cd_account(balance, interest_rate, months):
     # Create an instance of the `Account` class and pass in the balance and interest parameters.
     #  Hint: You need to add the interest as a value, i.e, 0.
     # ADD YOUR CODE HERE
+    if balance.isdigit() and interest_rate.isdigit() and months.isdigit():
+        balance = int(balance)
+        interest_rate = int(interest_rate)
+        months = int(months)
+        if balance > 0 and interest_rate >= 0 and months > 0:
+            account = Account(balance, 0)
+            # Calculate interest earned
+            # ADD YOUR CODE HERE
+            interest_earned = balance * (interest_rate/100 * months/12)
 
-    # Calculate interest earned
-    # ADD YOUR CODE HERE
+            # Update the CD account balance by adding the interest earned
+            # ADD YOUR CODE HERE
+            updated_balance = balance + interest_earned
 
-    # Update the CD account balance by adding the interest earned
-    # ADD YOUR CODE HERE
+            # Pass the updated_balance to the set balance method using the instance of the CDAccount class.
+            # ADD YOUR CODE HERE
+            account.set_balance(balance=updated_balance)
 
-    # Pass the updated_balance to the set balance method using the instance of the CDAccount class.
-    # ADD YOUR CODE HERE
+            # Pass the interest_earned to the set interest method using the instance of the CDAccount class.
+            # ADD YOUR CODE HERE
+            account.set_interest(interest=interest_earned)
 
-    # Pass the interest_earned to the set interest method using the instance of the CDAccount class.
-    # ADD YOUR CODE HERE
-
-    # Return the updated balance and interest earned.
-    return  # ADD YOUR CODE HERE
+            # Return the updated balance and interest earned.
+            return  updated_balance, interest_earned
+        else:
+            print(f"Please check your inputs again.")
+            return -1, -1
+    else:
+        print(f"Please check your inputs again.")
+        return -1, -1
